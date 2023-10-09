@@ -11,6 +11,7 @@ target 'Instagram' do
   pod 'FirebaseFirestore', '10.3.0'
   pod 'FirebaseStorage', '10.3.0'
   pod 'FirebaseStorageUI', '12.3.0'
+  pod 'SVProgressHUD', '2.2.5'
 end
 post_install do |installer|
     installer.generated_projects.each do |project|
