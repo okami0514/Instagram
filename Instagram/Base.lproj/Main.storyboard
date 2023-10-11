@@ -96,10 +96,25 @@
                     <view key="view" contentMode="scaleToFill" id="HcA-Ki-ZhM">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cAA-oQ-ufW">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="lpx-K4-j1x"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lpx-K4-j1x" firstAttribute="trailing" secondItem="cAA-oQ-ufW" secondAttribute="trailing" id="Hvp-DA-CAC"/>
+                            <constraint firstItem="cAA-oQ-ufW" firstAttribute="top" secondItem="lpx-K4-j1x" secondAttribute="top" id="Nnj-WO-kLe"/>
+                            <constraint firstItem="lpx-K4-j1x" firstAttribute="bottom" secondItem="cAA-oQ-ufW" secondAttribute="bottom" id="O2e-pu-6kQ"/>
+                            <constraint firstItem="cAA-oQ-ufW" firstAttribute="leading" secondItem="lpx-K4-j1x" secondAttribute="leading" id="p9d-3D-h8x"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="ホーム" image="home" id="wfO-pu-gVo"/>
+                    <connections>
+                        <outlet property="tableView" destination="cAA-oQ-ufW" id="ezI-1H-I3o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AvT-Sv-5sv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -184,35 +199,47 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="et8-pZ-KNW">
-                                <rect key="frame" x="46.666666666666657" y="285" width="300" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="et8-pZ-KNW">
+                                <rect key="frame" x="46.666666666666657" y="219" width="300" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="lvT-WC-l9H"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="投稿" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handlePostButton:" destination="E0z-cS-lEB" eventType="touchUpInside" id="pzN-in-teo"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXh-VI-qQU">
-                                <rect key="frame" x="46.666666666666657" y="361" width="300" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXh-VI-qQU">
+                                <rect key="frame" x="46.666666666666657" y="269" width="300" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="N5d-C9-W0G"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="キャンセル" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCancelButton:" destination="E0z-cS-lEB" eventType="touchUpInside" id="0ZP-gg-PaQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fSy-qU-ikx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mXh-VI-qQU" firstAttribute="centerX" secondItem="Q6b-t9-YS7" secondAttribute="centerX" id="52P-cm-P2Q"/>
+                            <constraint firstItem="et8-pZ-KNW" firstAttribute="top" secondItem="5qm-8F-A7T" secondAttribute="bottom" constant="20" id="C5j-qi-NrC"/>
                             <constraint firstItem="fSy-qU-ikx" firstAttribute="trailing" secondItem="sL9-sk-4DD" secondAttribute="trailing" constant="10" id="KWD-tY-4p7"/>
                             <constraint firstItem="sL9-sk-4DD" firstAttribute="bottom" secondItem="5qm-8F-A7T" secondAttribute="bottom" id="NaH-Oy-Mz7"/>
                             <constraint firstItem="et8-pZ-KNW" firstAttribute="centerX" secondItem="Q6b-t9-YS7" secondAttribute="centerX" id="VEc-ZM-DYZ"/>
                             <constraint firstItem="5qm-8F-A7T" firstAttribute="top" secondItem="fSy-qU-ikx" secondAttribute="top" constant="20" id="czG-Ou-r7c"/>
                             <constraint firstItem="5qm-8F-A7T" firstAttribute="leading" secondItem="fSy-qU-ikx" secondAttribute="leading" constant="10" id="gGJ-OU-7G2"/>
+                            <constraint firstItem="mXh-VI-qQU" firstAttribute="top" secondItem="et8-pZ-KNW" secondAttribute="bottom" constant="10" id="kiZ-ow-lnM"/>
                             <constraint firstItem="sL9-sk-4DD" firstAttribute="leading" secondItem="5qm-8F-A7T" secondAttribute="trailing" constant="10" id="qM8-eS-9MK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="5qm-8F-A7T" id="ijA-bY-kHf"/>
+                        <outlet property="textField" destination="sL9-sk-4DD" id="hGl-fA-PUD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epk-3R-W6Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
