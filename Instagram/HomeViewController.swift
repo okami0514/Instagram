@@ -121,7 +121,6 @@ class HomeViewController: UIViewController , UITableViewDataSource, UITableViewD
         
         var alertTextField: UITextField?
         
-        
         let alert = UIAlertController(
             title: "コメント",
             message: "Enter comment",
@@ -145,11 +144,11 @@ class HomeViewController: UIViewController , UITableViewDataSource, UITableViewD
                         print("DEBUG_PRINT: OKボタンがタップされました。")
                         if (text.isEmpty == false) {
                             // 文字が入力されていた場合commentsを更新する
-                            if let myid = Auth.auth().currentUser?.uid {
+                            if let myName = Auth.auth().currentUser?.displayName {
                                 // 更新データを作成する
                                 var updateValue: FieldValue
                                 
-                                updateValue = FieldValue.arrayUnion([myid + "&" + text])
+                                updateValue = FieldValue.arrayUnion([myName + "&" + text])
                                 // commentsに更新データを書き込む
                                 let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
                                 postRef.updateData(["comments": updateValue])
@@ -161,10 +160,6 @@ class HomeViewController: UIViewController , UITableViewDataSource, UITableViewD
         )
         
         self.present(alert, animated: true, completion: nil)
-        
-        
-        
-        
         
     }
 }
