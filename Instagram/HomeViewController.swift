@@ -71,7 +71,7 @@ class HomeViewController: UIViewController , UITableViewDataSource, UITableViewD
         
         // セル内のボ良いねタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleLikesButton(_:forEvent:)), for: .touchUpInside)
-
+        
         // セル内のコメントボタンのアクションをソースコードで設定する
         cell.commentButton.addTarget(self, action:#selector(handleCommentsButton(_:forEvent:)), for: .touchUpInside)
         
@@ -119,23 +119,52 @@ class HomeViewController: UIViewController , UITableViewDataSource, UITableViewD
         // 配列からタップされたインデックスのデータを取り出す
         let postData = postArray[indexPath!.row]
         
-        // commentsを更新する
-        if let myid = Auth.auth().currentUser?.uid {
-            // 更新データを作成する
-            var updateValue: FieldValue
-//            if postData.isLiked {
-//                // すでにいいねをしている場合は、いいね解除のためmyidを取り除く更新データを作成
-//                updateValue = FieldValue.arrayRemove([myid])
-//            } else {
-//                // 今回新たにいいねを押した場合は、myidを追加する更新データを作成
-//                updateValue = FieldValue.arrayUnion([myid])
-//            }
-            
-            updateValue = FieldValue.arrayUnion([myid])
-            // likesに更新データを書き込む
-            let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-            postRef.updateData(["comments": updateValue])
-        }
+        var alertTextField: UITextField?
+        
+        
+        let alert = UIAlertController(
+            title: "コメント",
+            message: "Enter comment",
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField(
+            configurationHandler: {(textField: UITextField!) in
+                alertTextField = textField
+                
+            })
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: UIAlertAction.Style.cancel,
+                handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: UIAlertAction.Style.default) { _ in
+                    if let text = alertTextField?.text {
+                        
+                        print("DEBUG_PRINT: OKボタンがタップされました。")
+                        if (text.isEmpty == false) {
+                            // 文字が入力されていた場合commentsを更新する
+                            if let myid = Auth.auth().currentUser?.uid {
+                                // 更新データを作成する
+                                var updateValue: FieldValue
+                                
+                                updateValue = FieldValue.arrayUnion([myid + "&" + text])
+                                // commentsに更新データを書き込む
+                                let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+                                postRef.updateData(["comments": updateValue])
+                            }
+                        }
+                        
+                    }
+                }
+        )
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+        
         
     }
 }

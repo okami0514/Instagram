@@ -33,10 +33,6 @@ class PostTableViewCell: UITableViewCell {
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
         
-        // コメントの表示
-//        let comments = postData.comments
-//        likeLabel.text = "\(likeNumber)"
-        
         // いいねボタンの表示
         if postData.isLiked {
             let buttonImage = UIImage(named: "like_exist")
@@ -45,5 +41,8 @@ class PostTableViewCell: UITableViewCell {
             let buttonImage = UIImage(named: "like_none")
             self.likeButton.setImage(buttonImage, for: .normal)
         }
+        
+        // コメントの表示
+        let comments = postData.comments
     }
 }
