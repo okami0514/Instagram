@@ -23,8 +23,7 @@ class PostTableViewCell: UITableViewCell {
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
         postImageView.sd_setImage(with: imageRef)
         
-        // キャプションの表示
-        self.captionLabel.text = "\(postData.name) : \(postData.caption)"
+        
         
         // 日時の表示
         self.dateLabel.text = postData.date
@@ -41,8 +40,19 @@ class PostTableViewCell: UITableViewCell {
             let buttonImage = UIImage(named: "like_none")
             self.likeButton.setImage(buttonImage, for: .normal)
         }
-
+        
         // コメントの表示
         let comments = postData.comments
+        
+        var sumString = "\(postData.name) : \(postData.caption)"
+        for comment in 0...comments.count - 1 {
+            if comment == 0 {
+                sumString += "\n\n" + "コメント一覧"
+            }
+            sumString += "\n" + comments[comment]
+        }
+        
+        // キャプションの表示
+        self.captionLabel.text = sumString
     }
 }
