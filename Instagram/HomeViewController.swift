@@ -148,7 +148,7 @@ class HomeViewController: UIViewController , UITableViewDataSource, UITableViewD
                                 // 更新データを作成する
                                 var updateValue: FieldValue
                                 
-                                updateValue = FieldValue.arrayUnion([myName + "&" + text])
+                                updateValue = FieldValue.arrayUnion([myName + ":" + text])
                                 // commentsに更新データを書き込む
                                 let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
                                 postRef.updateData(["comments": updateValue])

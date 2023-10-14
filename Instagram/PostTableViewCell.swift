@@ -45,12 +45,16 @@ class PostTableViewCell: UITableViewCell {
         let comments = postData.comments
         
         var sumString = "\(postData.name) : \(postData.caption)"
-        for comment in 0...comments.count - 1 {
-            if comment == 0 {
-                sumString += "\n\n" + "コメント一覧"
+        
+        if  comments.isEmpty == false {
+            for comment in 0...comments.count - 1 {
+                if comment == 0 {
+                    sumString += "\n\n" + "コメント一覧"
+                }
+                sumString += "\n" + comments[comment]
             }
-            sumString += "\n" + comments[comment]
         }
+
         
         // キャプションの表示
         self.captionLabel.text = sumString
